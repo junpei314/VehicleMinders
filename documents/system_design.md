@@ -39,4 +39,4 @@
 | date            | Date       |||||通知を送る日                |
 
 ### システム構成図
-<img src="img/VehicleMinders.png width="500">
+<img src="img/VehicleMinders.png" width="500">
