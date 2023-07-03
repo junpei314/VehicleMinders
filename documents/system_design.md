@@ -1,11 +1,11 @@
 ### 業務フロー
-<img src="img/%E6%A5%AD%E5%8B%99%E3%83%95%E3%83%AD%E3%83%BC.png" width="700">
+<img src="img/%E6%A5%AD%E5%8B%99%E3%83%95%E3%83%AD%E3%83%BC.png" width="900">
 
 ### 画面遷移図
-<img src="img/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png" width="700">
+<img src="img/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png" width="900">
 
 ### ワイヤーフレーム
-<img src="img/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0.png" width="700">
+<img src="img/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0.png" width="900">
 
 ### テーブル定義
 車両テーブル（Vehicles）
@@ -39,4 +39,4 @@
 | date            | Date       |||||通知を送る日                |
 
 ### システム構成図
-<img src="img/VehicleMinders.png" width="700">
+<img src="img/VehicleMinders.png" width="900">
