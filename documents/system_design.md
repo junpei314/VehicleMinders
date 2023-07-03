@@ -29,30 +29,29 @@
 - 費用
     - 5000〜10000/月
 
-<h2>
+<h3>
 <details>
 <summary>業務フロー</summary>
 <img src="img/%E6%A5%AD%E5%8B%99%E3%83%95%E3%83%AD%E3%83%BC.png" width="900">
 </details>
-</h2>
+</h3>
 
-<h2>
+<h3>
 <details>
 <summary>画面遷移図</summary>
 <img src="img/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png" width="900">
 </details>
-</h2>
+</h3>
 
-<h2>
+<h3>
 <details>
 <summary>ワイヤーフレーム</summary>
 <img src="img/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0.png" width="900">
 </details>
-</h2>
+</h3>
 
-<h2>
 <details>
-<summary>テーブル定義</summary>
+<summary><h3>テーブル定義</h3></summary>
 車両テーブル（Vehicles）
 
 | カラム名      | データ型       | NULL | キー | 初期値 | AUTO INCREMENT | 説明 |
@@ -83,11 +82,10 @@
 | vehicle_id      | Integer    ||外部キー|||通知に関連する車両ID       |
 | date            | Date       |||||通知を送る日                |
 </details>
-</h2>
 
-<h2>
+<h3>
 <details>
 <summary> システム構成図 </summary>
 <img src="img/VehicleMinders.png" width="900">
 </details>
-</h2>
+</h3>
