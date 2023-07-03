@@ -29,26 +29,26 @@
 - 費用
     - 5000〜10000/月
 
-<h3>
+
 <details>
-<summary>業務フロー</summary>
+<summary><h3>業務フロー</h3></summary>
 <img src="img/%E6%A5%AD%E5%8B%99%E3%83%95%E3%83%AD%E3%83%BC.png" width="900">
 </details>
-</h3>
 
-<h3>
+
+
 <details>
-<summary>画面遷移図</summary>
+<summary><h3>画面遷移図</h3></summary>
 <img src="img/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3.png" width="900">
 </details>
-</h3>
 
-<h3>
+
+
 <details>
-<summary>ワイヤーフレーム</summary>
+<summary><h3>ワイヤーフレーム</h3></summary>
 <img src="img/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0.png" width="900">
 </details>
-</h3>
+
 
 <details>
 <summary><h3>テーブル定義</h3></summary>
@@ -83,9 +83,8 @@
 | date            | Date       |||||通知を送る日                |
 </details>
 
-<h3>
+
 <details>
-<summary> システム構成図 </summary>
+<summary> <h3>システム構成図</h3> </summary>
 <img src="img/VehicleMinders.png" width="900">
 </details>
-</h3>
