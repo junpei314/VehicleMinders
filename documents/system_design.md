@@ -63,6 +63,7 @@
 | license_plate | String     ||||| ナンバープレート番号        |
 | lease_expiry  | Date       |YES|||| リースの満了日              |
 | inspection_due| Date       |YES|||| 次の車検日 |
+| user_id     | Integer         ||外部キー||||
 
 ユーザーテーブル（Users）
 
@@ -72,7 +73,7 @@
 | name         | String         ||||| ユーザー名                  |
 | email        | String         ||||| メールアドレス              |
 | password     | String         ||||| パスワード（ハッシュ化済み） |
-| vehicle_id     | Integer         ||外部キー||||
+
 
 通知テーブル（Notifications）
 

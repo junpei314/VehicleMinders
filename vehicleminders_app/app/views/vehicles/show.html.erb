@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+  <table>
+  <tr>
+    <th>メーカー</th>
+    <th>モデル</th>
+    <th>製造年</th>
+    <th>ナンバープレート</th>
+    <th>リース満了日</th>
+    <th>車検更新日</th>
+  </tr>
+  <tr>
+    <td><%= @vehicle.maker %></td>
+    <td><%= @vehicle.model %></td>
+    <td><%= @vehicle.production_year %></td>
+    <td><%= @vehicle.license_plate %></td>
+    <td><%= @vehicle.lease_expiry %></td>
+    <td><%= @vehicle.inspection_due %></td>
+  </tr>
+</table>
+
+  </body>
+</html>

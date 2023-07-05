@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_04_172404) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_074937) do
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "vehicle_id"
@@ -25,10 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_172404) do
     t.string "name"
     t.string "email"
     t.string "password"
-    t.bigint "vehicle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["vehicle_id"], name: "index_users_on_vehicle_id"
   end
 
   create_table "vehicles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -44,5 +42,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_04_172404) do
 
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "vehicles"
-  add_foreign_key "users", "vehicles"
 end
