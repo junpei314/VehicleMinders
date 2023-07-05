@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+  <%= form_with model: @vehicle, local: true, html: { multipart: true } do |form| %>
+    <div>
+      <label>CSVファイル</label>
+      <div>
+        <%= form.file_field :csv, accept: '.csv,.xlsx,.xls' %>
+      </div>
+    </div>
+    <br>
+    <%= form.submit "実行" %>
+  <% end %>
+  
+  </body>
+</html>

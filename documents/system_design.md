@@ -57,12 +57,13 @@
 | カラム名      | データ型       | NULL | キー | 初期値 | AUTO INCREMENT | 説明 |
 | ------------- | -----------|--|--|--|--|----------------------------- |
 | vehicle_id    | Integer    ||主キー||YES||
-| make          | String     ||||| 車両のメーカー名             |
+| maker          | String     ||||| 車両のメーカー名             |
 | model         | String     ||||| 車両のモデル名              |
-| year          | Integer    ||||| 車両の製造年                |
+| production_year          | Integer    ||||| 車両の製造年                |
 | license_plate | String     ||||| ナンバープレート番号        |
 | lease_expiry  | Date       |YES|||| リースの満了日              |
 | inspection_due| Date       |YES|||| 次の車検日 |
+| user_id     | Integer         ||外部キー||||
 
 ユーザーテーブル（Users）
 
@@ -72,6 +73,7 @@
 | name         | String         ||||| ユーザー名                  |
 | email        | String         ||||| メールアドレス              |
 | password     | String         ||||| パスワード（ハッシュ化済み） |
+
 
 通知テーブル（Notifications）
 

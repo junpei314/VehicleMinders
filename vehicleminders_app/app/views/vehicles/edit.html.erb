@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+
+  <%= form_with model:@vehicle ,local: true do |form| %>
+  <table>
+    <tr>
+      <th>メーカー</th>
+      <th>モデル</th>
+      <th>製造年</th>
+      <th>ナンバープレート</th>
+      <th>リース満了日</th>
+      <th>車検更新日</th>
+    </tr>
+
+    <tr>
+      <td><%= form.text_field :maker, placeholder: @vehicle.maker %></td>
+      <td><%= form.text_field :model, placeholder: @vehicle.model %></td>
+      <td><%= form.text_field :production_year, placeholder: @vehicle.production_year %></td>
+      <td><%= form.text_field :license_plate, placeholder: @vehicle.license_plate %></td>
+      <td><%= form.text_field :lease_expiry, placeholder: @vehicle.lease_expiry %></td>
+      <td><%= form.text_field :inspection_due, placeholder: @vehicle.inspection_due %></td>
+      <td><%= form.submit "更新" %></td>
+    </tr>
+  </table>
+<% end %>
+
+  </body>
+</html>
