@@ -5,7 +5,7 @@
     <title>CSVをインポートする</title>
   </head>
   <body>
-  <table>
+  <table border="1" style="border-collapse: collapse">
   <tr>
     <th>メーカー</th>
     <th>モデル</th>
@@ -13,6 +13,7 @@
     <th>ナンバープレート</th>
     <th>リース満了日</th>
     <th>車検更新日</th>
+    <th>通知日</th>
   </tr>
   <% @vehicles.each do |vehicle| %>
     <tr>
@@ -22,8 +23,9 @@
       <td><%= vehicle.license_plate %></td>
       <td><%= vehicle.lease_expiry %></td>
       <td><%= vehicle.inspection_due %></td>
-      <td><%= link_to "編集", "/vehicles/#{vehicle.id}/edit" %></td>
-      <td><%= link_to "削除", "/vehicles/#{vehicle.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'} %></td>
+      <td><%= link_to "設定", "/notifications/index/#{vehicle.id}", class: "btn edit" %></td>
+      <td><%= link_to "編集", "/vehicles/#{vehicle.id}/edit", class: "btn edit" %></td>
+      <td><%= link_to "削除", "/vehicles/#{vehicle.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'}, class: "btn delete" %></td>
     </tr>
   <% end %>
 </table>

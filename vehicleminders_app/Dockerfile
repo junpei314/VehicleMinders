@@ -1,4 +1,8 @@
 FROM ruby:3.1
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+apt-get install -y nodejs
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir /VehicleMinders
 WORKDIR /VehicleMinders
 COPY Gemfile /VehicleMinders/Gemfile

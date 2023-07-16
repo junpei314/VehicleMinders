@@ -22,8 +22,8 @@
       <td><%= form.text_field :model, placeholder: @vehicle.model %></td>
       <td><%= form.text_field :production_year, placeholder: @vehicle.production_year %></td>
       <td><%= form.text_field :license_plate, placeholder: @vehicle.license_plate %></td>
-      <td><%= form.text_field :lease_expiry, placeholder: @vehicle.lease_expiry %></td>
-      <td><%= form.text_field :inspection_due, placeholder: @vehicle.inspection_due %></td>
+      <td><%= form.date_field :lease_expiry, placeholder: @vehicle.lease_expiry %></td>
+      <td><%= form.date_field :inspection_due, placeholder: @vehicle.inspection_due %></td>
       <td><%= form.submit "更新" %></td>
     </tr>
   </table>

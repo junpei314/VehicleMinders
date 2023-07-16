@@ -5,7 +5,7 @@
     <title>CSVをインポートする</title>
   </head>
   <body>
-  <%= form_with model: @vehicle, local: true, html: { multipart: true } do |form| %>
+  <%= form_with url: "/vehicles/upload/#{current_user.id}", method: :post, local: true, html: { multipart: true } do |form| %>
     <div>
       <label>CSVファイル</label>
       <div>
@@ -13,7 +13,9 @@
       </div>
     </div>
     <br>
-    <%= form.submit "実行" %>
+    <div class="main">
+      <%= form.submit "アップロード", class: "btn btn-primary import" %>
+    </div>
   <% end %>
   
   </body>

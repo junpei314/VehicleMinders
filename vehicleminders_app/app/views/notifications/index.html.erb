@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+  <table border="1" style="border-collapse: collapse">
+  <tr>
+    <th>通知日一覧</th>
+    <th>通知時間一覧</th>
+  </tr>
+  <% @notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.datetime %></td>
+      <td><%= link_to "編集", "/notifications/#{notification.id}/edit", class: "btn edit" %></td>
+      <td><%= link_to "削除", "/notifications/#{notification.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'}, class: "btn delete" %></td>
+    </tr>
+  <% end %>
+</table>
+<%= form_with model:@notification ,local: true do |form| %>
+  <%= form.hidden_field :user_id, value: @user_id %>
+  <%= form.hidden_field :vehicle_id, value: @vehicle_id %>
+  <table>
+    <tr>
+      <th>追加日</th>
+      <th>追加時間</th>
+    </tr>
+    <tr>
+      <td><%= form.date_field :date %></td>
+      <td><%= form.time_field :time %></td>
+      <td><%= form.submit "追加" %></td>
+    </tr>
+  </table>
+<% end %>
+  </body>
+</html>

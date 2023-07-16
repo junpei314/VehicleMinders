@@ -1,0 +1,235 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  footer {
+    small {
+      display: block;
+      float: none;
+      margin-bottom: 1em;
+    }
+    ul {
+      float: none;
+      padding: 0;
+      li {
+        float: none;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* Dropdown menu */
+
+.dropdown-menu.active {
+  display: block;
+}
+
+/* main contents */
+.main {
+  display: inline-block;
+  // .mainを中央寄せにする
+  margin: 0 auto;
+  // .mainの幅を指定
+  width: 100%;
+  // .mainの上下左右の余白を指定
+  padding: 20px;
+  // .mainの上下左右の角丸を指定
+  border-radius: 10px;
+  // .mainの子要素のaタグを中央揃えにする
+  text-align: center;
+  // aタグの大きさを指定
+  .btn {
+    width: 25%;
+    // aタグの上下左右の余白を指定
+    padding: 30px;
+    margin: 0 20px;
+    // aタグの上下左右の角丸を指定
+    border-radius: 10px;
+    font-size: 30px;
+  }
+  .import {
+    width: 20%;
+    // aタグの上下左右の余白を指定
+    padding: 20px;
+    // aタグの上下左右の角丸を指定
+    border-radius: 10px;
+    font-size: 20px;
+  }
+}
+
+// tableタグを中央寄せにする
+table {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 18px;
+  text-align: center;
+}
+table,th,td {
+  border: 1px solid #bbb;
+}
+
+.edit .delete {
+  width: 100%;
+  padding: 5px;
+  margin: 0 auto;
+  font-size: 16px;
+  text-align: center;
+}
