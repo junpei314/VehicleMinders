@@ -1,20 +1,19 @@
-class SessionsController < ApplicationController
+# frozen_string_literal: true
 
-  def new
-  end
+# SessionsController
+#
+# このコントローラは、ユーザーのセッション管理を担当します。具体的には、ユーザーのログインとログアウトの
+# 機能を提供します。
+#
+class SessionsController < ApplicationController
+  def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      forwarding_url = session[:forwarding_url]
-      # ユーザーログイン後にユーザー情報のページにリダイレクトする
-      reset_session      # ログインの直前に必ずこれを書くこと
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      log_in user
-      redirect_to forwarding_url || user
+    if user&.authenticate(params[:session][:password])
+      log_in_and_redirect(user)
     else
-      # エラーメッセージを作成する
-      flash.now[:danger] = 'Invalid email/password combination' # 本当は正しくない
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity
     end
   end
@@ -22,5 +21,15 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     redirect_to root_url, status: :see_other
+  end
+
+  private
+
+  def log_in_and_redirect(user)
+    forwarding_url = session[:forwarding_url]
+    reset_session
+    params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+    log_in user
+    redirect_to forwarding_url || user
   end
 end

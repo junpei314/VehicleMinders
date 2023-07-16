@@ -1,8 +1,10 @@
-module SessionsHelper
+# frozen_string_literal: true
 
+# アカウント登録、ログイン、ログアウトを実装するためのヘルパー
+module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
-        # セッションリプレイ攻撃から保護する
+    # セッションリプレイ攻撃から保護する
     # 詳しくは https://bit.ly/33UvK0w を参照
     session[:session_token] = user.session_token
   end
@@ -13,18 +15,15 @@ module SessionsHelper
     cookies.permanent.encrypted[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
-  
 
   # 現在ログイン中のユーザーを返す（いる場合）
   def current_user
     if (user_id = session[:user_id])
       user = User.find_by(id: user_id)
-      if user && session[:session_token] == user.session_token
-        @current_user = user
-      end
+      @current_user = user if user && session[:session_token] == user.session_token
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
+      if user&.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -35,8 +34,8 @@ module SessionsHelper
   def current_user?(user)
     user && user == current_user
   end
-  
-      # ユーザーがログインしていればtrue、その他ならfalseを返す
+
+  # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?
     !current_user.nil?
   end
@@ -52,7 +51,7 @@ module SessionsHelper
   def log_out
     forget(current_user)
     reset_session
-    @current_user = nil   # 安全のため
+    @current_user = nil # 安全のため
   end
 
   # アクセスしようとしたURLを保存する

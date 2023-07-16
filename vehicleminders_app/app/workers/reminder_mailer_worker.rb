@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+# ReminderMailerWorker
+#
+# このワーカーは、メール送信を管理します。
+#
 class ReminderMailerWorker
   include Sidekiq::Worker
 

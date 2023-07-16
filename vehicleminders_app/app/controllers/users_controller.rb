@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
+# UsersController
+#
+# usersテーブルに対するCRUD処理を行う
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: %i[edit update]
+  before_action :correct_user,   only: %i[edit update]
 
   def new
     @user = User.new
@@ -17,7 +22,7 @@ class UsersController < ApplicationController
     if @user.save
       reset_session
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = 'Welcome to the Sample App!'
       redirect_to @user
     else
       render 'new', status: :unprocessable_entity
@@ -31,7 +36,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
@@ -45,15 +50,15 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-    # beforeフィルタ
+  # beforeフィルタ
 
   # ログイン済みユーザーかどうか確認
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url, status: :see_other
-    end
+    return if logged_in?
+
+    store_location
+    flash[:danger] = 'Please log in.'
+    redirect_to login_url, status: :see_other
   end
 
   # 正しいユーザーかどうか確認

@@ -1,5 +1,10 @@
-class NotificationsController < ApplicationController
+# frozen_string_literal: true
 
+# NotificationController
+#
+# このコントローラは、notificationsテーブルへのCRUDを管理します。
+#
+class NotificationsController < ApplicationController
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
     @notification = Notification.new
@@ -21,7 +26,7 @@ class NotificationsController < ApplicationController
   def edit
     @notification = Notification.find(params[:id])
     @date = @notification.datetime.to_date # Dateオブジェクトに変換
-    @time = @notification.datetime.strftime("%H:%M") # "HH:MM" 形式の文字列に変換
+    @time = @notification.datetime.strftime('%H:%M') # "HH:MM" 形式の文字列に変換
   end
 
   def update
@@ -32,7 +37,7 @@ class NotificationsController < ApplicationController
       redirect_to "/notifications/index/#{notification.vehicle_id}"
     else
       # 更新が失敗した場合の処理
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
+      redirect_to '/notifications/index/'
     end
   end
 
@@ -51,9 +56,9 @@ class NotificationsController < ApplicationController
   def combined_datetime
     date_str = notification_params[:date]
     time_str = notification_params[:time]
-    
+
     # Combine the date and time into a single datetime
-    @datetime = DateTime.strptime("#{date_str}#{time_str}", "%Y-%m-%d %H:%M") if date_str.present? && time_str.present?
+    @datetime = DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
     # Remove the date and time keys from the params
     params[:notification].delete(:date)
     params[:notification].delete(:time)
