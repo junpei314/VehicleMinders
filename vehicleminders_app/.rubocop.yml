@@ -1,0 +1,11 @@
+AllCops:
+  Newcops: enable
+  Exclude:
+    - 'Gemfile'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'test/**/*'
+    - 'spec/**/*'
+    - 'features/**/*'

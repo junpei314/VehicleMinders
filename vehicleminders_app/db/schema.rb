@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_074937) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_14_151122) do
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "vehicle_id"
-    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "datetime"
     t.index ["user_id"], name: "index_notifications_on_user_id"
     t.index ["vehicle_id"], name: "index_notifications_on_vehicle_id"
   end
@@ -24,9 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_074937) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "vehicles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -38,8 +40,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_074937) do
     t.date "inspection_due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "vehicles"
+  add_foreign_key "vehicles", "users"
 end

@@ -19,8 +19,19 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     stdin_open: true
     tty: true
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/VehicleMinders
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
 volumes:
   mysql-data:
     driver: local
