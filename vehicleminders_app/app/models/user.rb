@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_secure_password
+  has_many :vehicles, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
   # 渡された文字列のハッシュ値を返す

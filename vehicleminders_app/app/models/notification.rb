@@ -3,6 +3,7 @@
 # Notificationモデルの定義
 class Notification < ApplicationRecord
   belongs_to :user
+  belongs_to :vehicle
   after_save :schedule_reminder_mailer, if: -> { datetime.present? }
 
   private

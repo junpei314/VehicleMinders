@@ -2,6 +2,6 @@
 
 # Vehicleモデルの定義
 class Vehicle < ApplicationRecord
-  # 複数の通知を持つ場合
+  belongs_to :user
   has_many :notifications, dependent: :destroy
 end

@@ -35,7 +35,7 @@ class VehiclesController < ApplicationController
     csv_data.each do |row|
       vehicle_params = get_vehicle_params(row)
       vehicle = create_vehicle(vehicle_params)
-      create_notification(row, vehicle.id)
+      create_notification(row, vehicle.id) if row[params[:datetime]].present?
     end
     redirect_to "/vehicles/index/#{current_user.id}"
   end
