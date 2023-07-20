@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+  <table class="edit-table">
+  <tr>
+    <th>通知日一覧</th>
+    <th>編集</th>
+    <th>削除</th>
+  </tr>
+  <% @notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.datetime %></td>
+      <td><%= link_to "編集", "/notifications/#{notification.id}/edit", class: "btn edit" %></td>
+      <td><%= link_to "削除", "/notifications/#{notification.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'}, class: "btn delete" %></td>
+    </tr>
+    <% end %>
+    <th><%= link_to "追加", "/notifications/new/#{@vehicle_id}", class: "btn edit" %></th>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+AllCops:
+  Newcops: enable
+  Exclude:
+    - 'Gemfile'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'test/**/*'
+    - 'spec/**/*'
+    - 'features/**/*'
+Metrics/AbcSize:
+  Max: 20

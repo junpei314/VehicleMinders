@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>CSVをインポートする</title>
+  </head>
+  <body>
+<%= form_with model:@notification ,local: true do |form| %>
+  <%= form.hidden_field :user_id, value: @user_id %>
+  <%= form.hidden_field :vehicle_id, value: @vehicle_id %>
+  <table class="edit-table">
+    <tr>
+      <th>追加日</th>
+      <th>追加時間</th>
+    </tr>
+    <tr class="cell">
+      <td><%= form.date_field :date %></td>
+      <td><%= form.time_field :time %></td>
+      <td><%= form.submit "追加" %></td>
+    </tr>
+  </table>
+<% end %>
+  </body>
+</html>

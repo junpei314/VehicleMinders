@@ -1,0 +1,33 @@
+<%= form_with(url:"/vehicles/import/#{params[:user_id]}", method: :post, class: 'form-center', local: true) do |form| %>
+  <div>
+    <label>メーカー</label>
+    <%= form.select :maker, @headers %>
+  </div>
+  <div>
+    <label>モデル</label>
+    <%= form.select :model, @headers %>
+  </div>
+  <div>
+    <label>製造年</label>
+    <%= form.select :production_year, @headers %>
+  </div>
+  <div>
+    <label>ナンバープレート番号</label>
+    <%= form.select :license_plate, @headers %>
+  </div>
+  <div>
+    <label>リース満了日</label>
+    <%= form.select :lease_expiry, @headers %>
+  </div>
+  <div>
+    <label>車検更新日</label>
+    <%= form.select :inspection_due, @headers %>
+  </div>
+  <div>
+  <label>通知日</label>
+  <%= form.select :datetime, @headers %>
+</div>
+  <div class="main">
+  <%= form.submit "インポート", class: "form-btn" %>
+</div>
+<% end %>
