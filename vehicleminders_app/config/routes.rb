@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
   get "/notifications/index/:vehicle_id", to: "notifications#index"
+  get "/notifications/new/:vehicle_id", to: "notifications#new"
   resources :notifications
 end

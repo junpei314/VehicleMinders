@@ -7,6 +7,10 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
+    @vehicle_id = params[:vehicle_id]
+  end
+  
+  def new
     @notification = Notification.new
     @vehicle_id = params[:vehicle_id]
     @user_id = current_user.id

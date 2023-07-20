@@ -5,16 +5,12 @@
     <title>CSVをインポートする</title>
   </head>
   <body>
-  <%= form_with url: "/vehicles/upload/#{current_user.id}", method: :post, local: true, html: { multipart: true } do |form| %>
-    <div>
-      <label>CSVファイル</label>
-      <div>
-        <%= form.file_field :csv, accept: '.csv,.xlsx,.xls' %>
-      </div>
-    </div>
-    <br>
-    <div class="main">
-      <%= form.submit "アップロード", class: "btn btn-primary import" %>
+  <%= form_with(url: "/vehicles/upload/#{current_user.id}", method: :post, class: 'form-center', local: true, html: { multipart: true }) do |form| %>
+  <div class="main">
+  <div>
+    <%= form.file_field :csv, accept: '.csv,.xlsx,.xls' %>
+  </div>
+      <%= form.submit "アップロード", class: "form-btn" %>
     </div>
   <% end %>
   

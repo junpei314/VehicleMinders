@@ -1,4 +1,4 @@
-<%= form_with url:"/vehicles/import/#{params[:user_id]}", method: :post, local: true do |form| %>
+<%= form_with(url:"/vehicles/import/#{params[:user_id]}", method: :post, class: 'form-center', local: true) do |form| %>
   <div>
     <label>メーカー</label>
     <%= form.select :maker, @headers %>
@@ -28,6 +28,6 @@
   <%= form.select :datetime, @headers %>
 </div>
   <div class="main">
-  <%= form.submit "インポート", class: "btn btn-primary import" %>
+  <%= form.submit "インポート", class: "form-btn" %>
 </div>
 <% end %>

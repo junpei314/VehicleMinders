@@ -7,7 +7,7 @@
   <body>
 
   <%= form_with model:@vehicle ,local: true do |form| %>
-  <table>
+  <table class="edit-table">
     <tr>
       <th>メーカー</th>
       <th>モデル</th>
@@ -17,7 +17,7 @@
       <th>車検更新日</th>
     </tr>
 
-    <tr>
+    <tr class="cell">
       <td><%= form.text_field :maker, placeholder: @vehicle.maker %></td>
       <td><%= form.text_field :model, placeholder: @vehicle.model %></td>
       <td><%= form.text_field :production_year, placeholder: @vehicle.production_year %></td>
