@@ -1,4 +1,4 @@
-<%= form_with(url:"/vehicles/import/#{params[:user_id]}", method: :post, class: 'form-center', local: true) do |form| %>
+<%= form_with(url:"/vehicles/import/#{current_user.id}", method: :post, class: 'form-center', local: true) do |form| %>
   <div>
     <label>メーカー</label>
     <%= form.select :maker, @headers %>
