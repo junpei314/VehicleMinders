@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile-rails
     environment:
-      - AWS_ACCESS_KEY_ID=AKIAYNGZZEYJPEMVO63K
-      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
       - RAILS_ENV=production
     command: bundle exec puma -C config/puma.rb
     volumes:
