@@ -6,6 +6,10 @@ require 'csv'
 #
 # vehiclesテーブルに対してCRUD処理を行うコントローラー
 class VehiclesController < ApplicationController
+  before_action :logged_in_user, only: %i[index new create show edit update destroy]
+  before_action :correct_user, only: %i[index]
+  before_action :correct_vehicle, only: %i[edit update destroy]
+
   skip_before_action :verify_authenticity_token
 
   def home; end
@@ -34,7 +38,7 @@ class VehiclesController < ApplicationController
     csv_data = CSV.parse(session.delete(:csv_file), headers: true)
     csv_data.each do |row|
       vehicle_params = get_vehicle_params(row)
-      vehicle = create_vehicle(vehicle_params)
+      vehicle = Vehicle.create(vehicle_params)
       create_notification(row, vehicle.id) if row[params[:datetime]].present?
     end
     redirect_to "/vehicles/index/#{current_user.id}"
@@ -51,16 +55,15 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = Vehicle.find(params[:vehicle_id])
   end
 
   def edit
-    @vehicle = Vehicle.find(params[:id])
-    puts @vehicle.id
+    @vehicle = Vehicle.find(params[:vehicle_id])
   end
 
   def update
-    vehicle = Vehicle.find(params[:id])
+    vehicle = Vehicle.find(params[:vehicle_id])
     if vehicle.update(vehicles_params)
       # 更新が成功した場合の処理
       redirect_to "/vehicles/index/#{current_user.id}"
@@ -71,7 +74,7 @@ class VehiclesController < ApplicationController
   end
 
   def destroy
-    vehicle = Vehicle.find(params[:id])
+    vehicle = Vehicle.find(params[:vehicle_id])
     vehicle.destroy
     redirect_to "/vehicles/index/#{current_user.id}", status: :see_other
   end
@@ -92,10 +95,6 @@ class VehiclesController < ApplicationController
       inspection_due: row[params[:inspection_due]],
       user_id: current_user.id
     }
-  end
-
-  def create_vehicle(vehicle_params)
-    Vehicle.create(vehicle_params)
   end
 
   def create_notification(row, vehicle_id)

@@ -5,6 +5,10 @@
 # このコントローラは、notificationsテーブルへのCRUDを管理します。
 #
 class NotificationsController < ApplicationController
+  before_action :logged_in_user, only: %i[index new create edit update destroy]
+  before_action :correct_vehicle, only: %i[index]
+  before_action :correct_notification, only: %i[edit update destroy]
+
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
     @vehicle_id = params[:vehicle_id]
@@ -28,14 +32,14 @@ class NotificationsController < ApplicationController
   end
 
   def edit
-    @notification = Notification.find(params[:id])
+    @notification = Notification.find(params[:notification_id])
     @date = @notification.datetime.to_date # Dateオブジェクトに変換
     @time = @notification.datetime.strftime('%H:%M') # "HH:MM" 形式の文字列に変換
   end
 
   def update
     combined_datetime
-    notification = Notification.find(params[:id])
+    notification = Notification.find(params[:notification_id])
     if notification.update(datetime: @datetime)
       # 更新が成功した場合の処理
       redirect_to "/notifications/index/#{notification.vehicle_id}"
@@ -46,7 +50,7 @@ class NotificationsController < ApplicationController
   end
 
   def destroy
-    notification = Notification.find(params[:id])
+    notification = Notification.find(params[:notification_id])
     notification.destroy
     redirect_to "/notifications/index/#{notification.vehicle_id}", status: :see_other
   end

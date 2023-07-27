@@ -1,7 +1,19 @@
 <!-- app/views/user_mailer/reminder_email.html.erb -->
-<p>Hi <%= @user.name %>,</p>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h1>あなたの車両の車検期限が近づいています</h1>
+    <p><%=@user.name %>様</p>
 
-<p>This is your reminder.</p>
+    <p>あなたがVehicleMindersで登録した車両、メーカー名: <%=@vehicle.maker %>、 モデル名: <%=@vehicle.model %>、ナンバープレート番号: <%=@vehicle.license_plate %>の車検期限が近づいています。</p>
 
-<p>Thanks,<br>
-Your Team</p>
+    <p>次回の車検期限は<%=@vehicle.inspection_due %>です。お忘れなく、適切な手続きを行ってください。</p>
+
+    <p>ご不明な点がありましたら、お気軽にお問い合わせください。</p>
+
+    <p>VehicleMinders サポート</p>
+</body>
+</html>
+
