@@ -13,8 +13,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    # @vehicles = Vehicle.where(user_id: @user.id) vehiclesテーブルにuser_idを追加できたらコメントアウト解除
-    @vehicles = Vehicle.all
   end
 
   def create
@@ -46,15 +44,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+    params.require(:user).permit(:name, :email, :webhook_url, :password, :password_confirmation)
   end
-
-  # beforeフィルタ
-
-  # # 正しいユーザーかどうか確認
-  # def correct_user
-  #   @user = User.find(params[:id])
-  #   redirect_to("/users/#{current_user.id}", status: :see_other) unless current_user?(@user)
-  # end
 end
