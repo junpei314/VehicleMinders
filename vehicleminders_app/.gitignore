@@ -1,4 +1,4 @@
-../vehicleminders_app/.env
+.env
 
 # Ignore bundler config.
 /.bundle
