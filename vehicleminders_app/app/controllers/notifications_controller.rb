@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   before_action :logged_in_user, only: %i[index new create edit update destroy]
   before_action :correct_vehicle, only: %i[index]
   before_action :correct_notification, only: %i[edit update destroy]
-  before_action :combined_datetime, only: %i[create update]
+  # before_action :combined_datetime, only: %i[create update]
 
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
@@ -22,9 +22,9 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    notification = Notification.new(notification_params)
-    notification.datetime = @datetime
-    if @datetime.present? && notification.save
+    notification = Notification.new(user_id: notification_params[:user_id], vehicle_id: notification_params[:vehicle_id])
+    notification.datetime = combined_datetime
+    if notification.datetime.present? && notification.save
       redirect_to "/notifications/index/#{notification.vehicle_id}"
     else
       flash[:danger] = '日付と時間を入力してください。'
@@ -38,7 +38,8 @@ class NotificationsController < ApplicationController
 
   def update
     notification = Notification.find(params[:notification_id])
-    if @datetime.present? && notification.update(datetime: @datetime)
+    notification.datetime = combined_datetime
+    if notification.datetime.present? && notification.save
       redirect_to "/notifications/index/#{notification.vehicle_id}"
     else
       flash[:danger] = '日付と時間を入力してください。'
@@ -61,8 +62,6 @@ class NotificationsController < ApplicationController
   def combined_datetime
     date_str = notification_params[:date]
     time_str = notification_params[:time]
-    params[:notification].delete(:date)
-    params[:notification].delete(:time)
-    @datetime = DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
+    DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
   end
 end
