@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   get "/notifications/index/:vehicle_id", to: "notifications#index"
   get "/notifications/new/:vehicle_id", to: "notifications#new"
   resources :notifications, param: :notification_id
-  get "*path", controller: "application", action: "render_404"
+  # get "*path", controller: "application", action: "render_404"
 end
