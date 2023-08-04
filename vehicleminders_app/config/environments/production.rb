@@ -28,8 +28,8 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-  # config.assets.compile = true
+  # config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -62,8 +62,18 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "VehicleMinders_production"
+  creds = Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+  Aws::Rails.add_action_mailer_delivery_method(
+    :ses, 
+    credentials: creds,
+    region: ENV['AWS_REGION']
+  )
 
+  config.action_mailer.default_url_options = { host: 'https://vehicleminders.com', protocol: 'https' }
+  config.action_mailer.delivery_method = :ses
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

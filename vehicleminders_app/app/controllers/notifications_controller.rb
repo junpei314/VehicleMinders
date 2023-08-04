@@ -8,6 +8,7 @@ class NotificationsController < ApplicationController
   before_action :logged_in_user, only: %i[index new create edit update destroy]
   before_action :correct_vehicle, only: %i[index]
   before_action :correct_notification, only: %i[edit update destroy]
+  # before_action :combined_datetime, only: %i[create update]
 
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
@@ -21,32 +22,19 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    combined_datetime
-    @notification = Notification.new(notification_params)
-    @notification.datetime = @datetime
-    if @datetime.present? && @notification.save
-      redirect_to "/notifications/index/#{notification_params[:vehicle_id]}"
-    else
-      redirect_to "/notifications/index/#{notification_params[:vehicle_id]}", status: :unprocessable_entity
-    end
+    notification = Notification.new(user_id: notification_params[:user_id], vehicle_id: notification_params[:vehicle_id])
+    notification.datetime = combined_datetime
+    save_and_redirect(notification)
   end
 
   def edit
     @notification = Notification.find(params[:notification_id])
-    @date = @notification.datetime.to_date # Dateオブジェクトに変換
-    @time = @notification.datetime.strftime('%H:%M') # "HH:MM" 形式の文字列に変換
   end
 
   def update
-    combined_datetime
     notification = Notification.find(params[:notification_id])
-    if notification.update(datetime: @datetime)
-      # 更新が成功した場合の処理
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
-    else
-      # 更新が失敗した場合の処理
-      redirect_to '/notifications/index/'
-    end
+    notification.datetime = combined_datetime
+    save_and_redirect(notification)
   end
 
   def destroy
@@ -64,12 +52,15 @@ class NotificationsController < ApplicationController
   def combined_datetime
     date_str = notification_params[:date]
     time_str = notification_params[:time]
+    DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
+  end
 
-    # Combine the date and time into a single datetime
-    @datetime = DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
-    # Remove the date and time keys from the params
-    params[:notification].delete(:date)
-    params[:notification].delete(:time)
-    @datetime
+  def save_and_redirect(notification)
+    if notification.datetime.present? && notification.save
+      redirect_to "/notifications/index/#{notification.vehicle_id}"
+    else
+      flash[:danger] = '日付と時間を入力してください。'
+      redirect_to "/notifications/index/#{notification.vehicle_id}"
+    end
   end
 end

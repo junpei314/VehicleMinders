@@ -9,8 +9,6 @@ class ReminderMailerWorker
 
   def perform(notification_id)
     notification = Notification.find(notification_id)
-    # vehicle = notification.vehicle
-    # user = notification.user
     UserMailer.reminder_email(notification).deliver_now
   end
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  root to: "vehicles#home"
+  root to: "users#home"
   delete '/vehicles', to: "vehicles#destroy"
   get "/vehicles/new/:user_id", to: "vehicles#new"
   get "/vehicles/index/:user_id", to: "vehicles#index"

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:session][:password])
       log_in_and_redirect(user)
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'メールアドレスまたはパスワードが違います。'
       render 'new', status: :unprocessable_entity
     end
   end
