@@ -16,5 +16,11 @@
   <%= f.label :パスワード確認用 %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+  <%= f.label :メールで通知する %>
+  <%= f.check_box :email_notification, class: 'form-checkbox' %>
+
+  <%= f.label :Teamsへメッセージ通知する %>
+  <%= f.check_box :webhook_notification, class: 'form-checkbox' %>
+
   <%= f.submit yield(:button_text), class: "form-btn" %>
 <% end %>

@@ -11,8 +11,6 @@ class VehiclesController < ApplicationController
   before_action :correct_vehicle, only: %i[edit update destroy]
   skip_before_action :verify_authenticity_token
 
-  def home; end
-  
   def index
     @vehicles = Vehicle.where(user_id: params[:user_id])
   end

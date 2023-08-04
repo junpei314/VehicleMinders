@@ -24,12 +24,7 @@ class NotificationsController < ApplicationController
   def create
     notification = Notification.new(user_id: notification_params[:user_id], vehicle_id: notification_params[:vehicle_id])
     notification.datetime = combined_datetime
-    if notification.datetime.present? && notification.save
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
-    else
-      flash[:danger] = '日付と時間を入力してください。'
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
-    end
+    save_and_redirect(notification)
   end
 
   def edit
@@ -39,12 +34,7 @@ class NotificationsController < ApplicationController
   def update
     notification = Notification.find(params[:notification_id])
     notification.datetime = combined_datetime
-    if notification.datetime.present? && notification.save
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
-    else
-      flash[:danger] = '日付と時間を入力してください。'
-      redirect_to "/notifications/index/#{notification.vehicle_id}"
-    end
+    save_and_redirect(notification)
   end
 
   def destroy
@@ -63,5 +53,14 @@ class NotificationsController < ApplicationController
     date_str = notification_params[:date]
     time_str = notification_params[:time]
     DateTime.strptime("#{date_str}#{time_str}", '%Y-%m-%d %H:%M') if date_str.present? && time_str.present?
+  end
+
+  def save_and_redirect(notification)
+    if notification.datetime.present? && notification.save
+      redirect_to "/notifications/index/#{notification.vehicle_id}"
+    else
+      flash[:danger] = '日付と時間を入力してください。'
+      redirect_to "/notifications/index/#{notification.vehicle_id}"
+    end
   end
 end

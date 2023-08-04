@@ -4,7 +4,7 @@ class CreateNotification < ActiveRecord::Migration[7.0]
       t.references :user, foreign_key: true
       t.references :vehicle, foreign_key: true
       t.datetime :datetime
-
+      
       t.timestamps
     end
   end

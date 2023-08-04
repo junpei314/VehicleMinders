@@ -7,6 +7,10 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[show index edit update destroy]
   before_action :correct_user, only: %i[show index edit update destroy]
 
+  def home
+    logged_in? ? redirect_to(user_path(current_user)) : render('home')
+  end
+
   def new
     @user = User.new
   end
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
       flash[:success] = 'ユーザー登録が完了しました。'
       redirect_to @user
     else
-      render 'new', status: :unprocessable_entity
+      render 'new'
     end
   end
 
@@ -37,13 +41,13 @@ class UsersController < ApplicationController
       flash[:success] = 'プロフィールを更新しました。'
       redirect_to @user
     else
-      render 'edit', status: :unprocessable_entity
+      render 'edit'
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :webhook_url, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :webhook_url, :password, :password_confirmation, :email_notification, :webhook_notification)
   end
 end
