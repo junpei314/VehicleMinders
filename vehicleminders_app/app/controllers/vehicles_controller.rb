@@ -12,7 +12,7 @@ class VehiclesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @vehicles = Vehicle.where(user_id: params[:user_id])
+    @vehicles = Vehicle.where(user_id: params[:user_id]).page(params[:page]).per(10)
   end
 
   def show
@@ -26,21 +26,11 @@ class VehiclesController < ApplicationController
   def upload
     uploaded_file = params[:csv]
     file_content = uploaded_file.read
-    session[:csv_file] = file_content
-    session[:headers] = CSV.parse_line(file_content.each_line.first)
-    redirect_to "/vehicles/select_columns/#{current_user.id}"
-  end
-
-  def select_columns
-    @headers = session[:headers]
-  end
-
-  def import
-    csv_data = CSV.parse(session.delete(:csv_file), headers: true)
+    csv_data = CSV.parse(file_content, headers: true)
     csv_data.each do |row|
       vehicle_params = get_vehicle_params(row)
       vehicle = Vehicle.create(vehicle_params)
-      create_notification(row, vehicle.id) if row[params[:datetime]].present?
+      create_notification(row, vehicle.id) if row[6].present?
     end
     redirect_to "/vehicles/index/#{current_user.id}"
   end
@@ -71,19 +61,19 @@ class VehiclesController < ApplicationController
 
   def get_vehicle_params(row)
     {
-      maker: row[params[:maker]],
-      model: row[params[:model]],
-      license_plate: row[params[:license_plate]],
-      production_year: row[params[:production_year]],
-      lease_expiry: row[params[:lease_expiry]],
-      inspection_due: row[params[:inspection_due]],
+      maker: row[0],
+      model: row[1],
+      license_plate: row[2],
+      production_year: row[3],
+      lease_expiry: row[4],
+      inspection_due: row[5],
       user_id: current_user.id
     }
   end
 
   def create_notification(row, vehicle_id)
     Notification.create(
-      datetime: row[params[:datetime]],
+      datetime: row[6],
       user_id: current_user.id,
       vehicle_id: vehicle_id
     )

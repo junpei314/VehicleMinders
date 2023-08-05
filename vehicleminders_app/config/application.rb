@@ -12,8 +12,7 @@ module VehicleMinders
     config.load_defaults 7.0
     config.time_zone = 'UTC'
     config.active_record.default_timezone = :utc
-    # config.time_zone = 'Tokyo' # or any other time zone
-    # config.active_record.default_timezone = :local
+    config.i18n.default_locale = :ja
     config.eager_load_paths << Rails.root.join('app/workers')
   end
 end
