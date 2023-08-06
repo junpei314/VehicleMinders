@@ -1,0 +1,33 @@
+FROM ruby:3.1
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
+RUN apt-get update -qq && apt-get install -y unzip jq curl
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn
+
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /VehicleMinders
+
+COPY Gemfile /VehicleMinders/Gemfile
+COPY Gemfile.lock /VehicleMinders/Gemfile.lock
+
+RUN bundle install
+
+RUN curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install || exit 1 && \
+    rm awscliv2.zip
+
+COPY . /VehicleMinders
+
+COPY entrypoint.prod.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.prod.sh
+ENTRYPOINT ["entrypoint.prod.sh"]
+
+EXPOSE 3000
