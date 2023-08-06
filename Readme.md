@@ -38,13 +38,13 @@
     - Sidekiq
 
 - フロントエンド
- - HTML, CSS
- - JavaScript
+    - HTML, CSS
+    - JavaScript
 
 - インフラ
- - Docker, Docker-compose
- - AWS ( EC2, RDS, ALB, Route53, ElastiCache for Redis, SES)
- - Teams Incommig Webhook
+    - Docker, Docker-compose
+    - AWS ( EC2, RDS, ALB, Route53, ElastiCache for Redis, SES)
+    - Teams Incommig Webhook
 
 
 ### ER図
