@@ -7,19 +7,19 @@
 
 ### サービス画面キャプチャ
 - ホーム画面(ログイン前)
-<img src="documents/img/home.png" width="900">
+<img src="documents/img/home.png" width="600">
 - ユーザー登録画面
-<img src="documents/img/signup.png" width="900">
+<img src="documents/img/signup.png" width="600">
 - ホーム画面(ログイン後)
-<img src="documents/img/home1.png" width="900">
+<img src="documents/img/home1.png" width="600">
 - CSVアップロード画面
-<img src="documents/img/upload.png" width="900">
+<img src="documents/img/upload.png" width="600">
 - データ一覧画面
-<img src="documents/img/vehicles_index.png" width="900">
+<img src="documents/img/vehicles_index.png" width="600">
 - データ編集画面
-<img src="documents/img/vehicle_edit.png" width="900">
+<img src="documents/img/vehicle_edit.png" width="600">
 - 通知時間編集画面
-<img src="documents/img/notification_edit.png" width="900">
+<img src="documents/img/notification_edit.png" width="600">
 
 
 ### 使用技術
@@ -42,10 +42,10 @@
 
 
 ### ER図
-<img src="documents/img/er.svg" width="900">
+<img src="documents/img/er.svg" width="600">
 
 ### インフラ構成図
-<img src="documents/img/infra.svg" width="900">
+<img src="documents/img/infra.svg" width="750">
 
 
 ### 機能一覧
