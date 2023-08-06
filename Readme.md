@@ -30,12 +30,12 @@
 
 ### 使用技術
 - バックエンド
- - Ruby 3.1.4
- - Ruby on Rails 7.0.6
- - Rubocop
- - Rspec
- - Nginx
- - Sidekiq
+    - Ruby 3.1.4
+    - Ruby on Rails 7.0.6
+    - Rubocop
+    - Rspec
+    - Nginx
+    - Sidekiq
 
 - フロントエンド
  - HTML, CSS
