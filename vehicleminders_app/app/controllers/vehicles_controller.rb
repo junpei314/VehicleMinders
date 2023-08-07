@@ -63,8 +63,8 @@ class VehiclesController < ApplicationController
     {
       maker: row[0],
       model: row[1],
-      license_plate: row[2],
-      production_year: row[3],
+      production_year: row[2],
+      license_plate: row[3],
       lease_expiry: row[4],
       inspection_due: row[5],
       user_id: current_user.id
