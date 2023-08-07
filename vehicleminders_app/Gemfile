@@ -46,7 +46,7 @@ gem 'rails-controller-testing'
 
 gem 'sidekiq'
 
-gem 'sidekiq-cron'
+gem 'aws-sdk-rails'
 
 gem 'kaminari'
 
@@ -72,5 +72,4 @@ group :test do
 end
 
 group :production do
-  gem 'aws-sdk-rails'
 end
