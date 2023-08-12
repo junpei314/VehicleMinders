@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 # UsersController
 #
 # usersテーブルに対するCRUD処理を行う
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[show index edit update destroy]
-  before_action :correct_user, only: %i[show index edit update destroy]
+  before_action :logged_in_user, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[show edit update destroy]
 
   def home
     logged_in? ? redirect_to(user_path(current_user)) : render('home')
@@ -45,9 +47,23 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+  def download_csv
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_csv, filename: "users-#{Date.today}.csv" }
+    end
+  end
 
+  private
+  
   def user_params
     params.require(:user).permit(:name, :email, :webhook_url, :password, :password_confirmation, :email_notification, :webhook_notification)
+  end
+
+  def generate_csv
+    CSV.generate do |csv|
+      csv << ["メーカー", "モデル", "製造年", "ナンバープレート", "リース満了日", "車検更新日", "通知日"]
+      csv << ["Toyota",	"Corolla",	"2005",	"13 さ 1000",	"2023-09-10",	"",	"2022-08-10T12:00:00"]
+    end
   end
 end

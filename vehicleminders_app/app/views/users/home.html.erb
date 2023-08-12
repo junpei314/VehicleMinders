@@ -1,4 +1,28 @@
-<div class="main">
-  <%= link_to "登録", signup_path, class: "btn btn-primary" %>
-  <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
+<div class="catchphrase-container">
+  <div class="catchphrase-contents">
+    <h1 class="catchphrase-title">車の重要な日、もう忘れない。</h1>
+    <p class="catchphrase-subtitle">Vehicle Mindersで、安心のリマインドを。</p>
+  </div>
+  <div class="signup-container">
+    <%= link_to "登録", signup_path, class: "btn btn-primary" %>
+    <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
+  </div>
 </div>
+<ul class="slider-3" id="js-slider-3">
+  <li class="li-first">
+    <h3>STEP1.サンプルCSVファイルをダウンロードしてデータを入力</h3>
+    <%= link_to "CSVファイルをダウンロード", download_csv_path(format: "csv"), class: "btn btn-primary btn-csv" %>
+  </li>
+  <li>
+    <h3>STEP2.CSVファイルをアップロード</h3>
+    <div class="slide-img">
+      <%= image_tag "csv_upload.gif", size: "560x420" %>
+    </div>
+  </li>
+  <li>
+    <h3>STEP3.通知日を設定</h3>
+    <div class="slide-img">
+      <%= image_tag "set_notification_date.gif", size: "560x420" %>
+    </div>
+  </li>
+</ul>
