@@ -277,6 +277,10 @@ input {
 
 .slider-3 li:nth-child(1) {
   text-align: center;
+  .btn {
+    width: 30vw;
+    font-size: 20px;
+  }
 }
 
 .btn-csv {
