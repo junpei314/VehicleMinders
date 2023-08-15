@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   root to: "users#home"
   delete '/vehicles', to: "vehicles#destroy"
-  get "/vehicles/new/:user_id", to: "vehicles#new"
-  get "/vehicles/index/:user_id", to: "vehicles#index"
+  get "/vehicles/new/:user_id", to: "vehicles#new", as: 'new_vehicle_for_user'
+  get "/vehicles/index/:user_id", to: "vehicles#index", as: 'vehicles_for_user'
   post "/vehicles/upload/:vehicle_id", to: "vehicles#upload"
   post "/vehicles/import/:vehicle_id", to: "vehicles#import"
   get "/vehicles/select_columns/:user_id", to: "vehicles#select_columns"
