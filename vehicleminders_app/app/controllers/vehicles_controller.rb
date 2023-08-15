@@ -24,21 +24,18 @@ class VehiclesController < ApplicationController
   end
 
   def upload
-    uploaded_file = params[:csv]
-    file_content = uploaded_file.read
-    csv_data = CSV.parse(file_content, headers: true)
-    csv_data.each do |row|
-      vehicle_params = get_vehicle_params(row)
-      vehicle = Vehicle.create(vehicle_params)
-      create_notification(row, vehicle.id) if row[6].present?
+    unless params[:csv].present?
+      flash[:danger] = 'CSVファイルを選択してください' 
+      return redirect_to new_vehicle_for_user_path(current_user.id)
     end
-    redirect_to "/vehicles/index/#{current_user.id}"
+    import_csv_data(params[:csv].read)
+    redirect_to vehicles_for_user_path(current_user.id)
   end
 
   def edit
     @vehicle = Vehicle.find(params[:vehicle_id])
   end
-
+  
   def update
     vehicle = Vehicle.find(params[:vehicle_id])
     unless vehicle.update(vehicles_params)
@@ -46,19 +43,28 @@ class VehiclesController < ApplicationController
     end
     redirect_to "/vehicles/index/#{current_user.id}"
   end
-
+  
   def destroy
     vehicle = Vehicle.find(params[:vehicle_id])
     vehicle.destroy
     redirect_to "/vehicles/index/#{current_user.id}", status: :see_other
   end
-
+  
   private
-
+  
   def vehicles_params
     params.require(:vehicle).permit(:maker, :model, :production_year, :license_plate, :lease_expiry, :inspection_due)
   end
-
+  
+  def import_csv_data(file_content)
+    csv_data = CSV.parse(file_content, headers: true)
+    csv_data.each do |row|
+      vehicle_params = get_vehicle_params(row)
+      vehicle = Vehicle.create(vehicle_params)
+      create_notification(row, vehicle.id) if row[6].present?
+    end
+  end
+  
   def get_vehicle_params(row)
     {
       maker: row[0],
@@ -78,4 +84,6 @@ class VehiclesController < ApplicationController
       vehicle_id: vehicle_id
     )
   end
+
+  
 end
