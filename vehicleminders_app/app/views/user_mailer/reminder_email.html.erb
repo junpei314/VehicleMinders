@@ -4,16 +4,26 @@
 <head>
 </head>
 <body>
-    <h1>あなたの車両の車検期限が近づいています</h1>
-    <p><%=@user.name %>様</p>
+  <% if @vehicle.lease_expiry.present?
+      title = "リース満了日が近づいています"
+      date_info = @vehicle.lease_expiry
+      date_description = "次回のリース満了日は#{date_info}です。"
+    elsif @vehicle.inspection_due.present?
+      title = "車検期限が近づいています"
+      date_info = @vehicle.inspection_due
+      date_description = "次回の車検期限は#{date_info}です。"
+  end %>
 
-    <p>あなたがVehicleMindersで登録した車両、メーカー名: <%=@vehicle.maker %>、 モデル名: <%=@vehicle.model %>、ナンバープレート番号: <%=@vehicle.license_plate %>の車検期限が近づいています。</p>
+  <h1><%= title %></h1>
+  <p><%= @user.name %>様</p>
 
-    <p>次回の車検期限は<%=@vehicle.inspection_due %>です。お忘れなく、適切な手続きを行ってください。</p>
+  <p>
+    あなたがVehicleMindersで登録した車両、メーカー名: <%= @vehicle.maker %>、 モデル名: <%= @vehicle.model %>、ナンバープレート番号: <%= @vehicle.license_plate %>の<%= title %>。
+  </p>
 
-    <p>ご不明な点がありましたら、お気軽にお問い合わせください。</p>
+  <p><%= date_description %>お忘れなく、適切な手続きを行ってください。</p>
 
-    <p>VehicleMinders サポート</p>
+  <p>ご不明な点がありましたら、お気軽にお問い合わせください。</p>
+  <p>VehicleMinders サポート</p>
 </body>
 </html>
-
