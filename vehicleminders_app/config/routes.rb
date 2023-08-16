@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   root to: "users#home"
-  delete '/vehicles', to: "vehicles#destroy"
-  get "/vehicles/new/:user_id", to: "vehicles#new", as: 'new_vehicle_for_user'
+  get "/vehicles/menu/:user_id", to: "vehicles#menu", as: 'menu'
+  get "/vehicles/new/:vehicle_id", to: "vehicles#new", as: 'new_vehicle_for_userz'
+  get "/vehicles/select_csv/:vehicle_id", to: "vehicles#select_csv", as: 'select_csv'
   get "/vehicles/index/:user_id", to: "vehicles#index", as: 'vehicles_for_user'
   post "/vehicles/upload/:vehicle_id", to: "vehicles#upload"
   post "/vehicles/import/:vehicle_id", to: "vehicles#import"
   get "/vehicles/select_columns/:user_id", to: "vehicles#select_columns"
+  delete '/vehicles', to: "vehicles#destroy"
   resources :vehicles, param: :vehicle_id
   get "/signup", to: "users#new"
   resources :users, param: :user_id
