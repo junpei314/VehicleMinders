@@ -34,7 +34,7 @@ class VehiclesController < ApplicationController
       flash[:success] = 'データ登録が完了しました。'
       redirect_to "/vehicles/index/#{current_user.id}"
     else
-      flash[:danger] = 'データ登録に失敗しました。'
+      flash[:danger] = @vehicle.errors.full_messages.join(', ')
       redirect_to "/vehicles/new/#{current_user.id}"
     end
   end
@@ -81,7 +81,7 @@ class VehiclesController < ApplicationController
     csv_data.each do |row|
       vehicle_params = get_vehicle_params(row)
       vehicle = Vehicle.create(vehicle_params)
-      create_notification(row, vehicle.id) if row[6].present?
+      create_notification(row, vehicle.id) if row[6].present? && row[6] > DateTime.now + 9.hours
     end
   end
 
