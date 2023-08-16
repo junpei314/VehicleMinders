@@ -15,35 +15,54 @@ class ReminderWebhookWorker
     notification = Notification.find(notification_id)
     vehicle = notification.vehicle
     user = notification.user
-    # Teams の Webhook URL
-    url = URI(user.webhook_url)
 
-    # メッセージの内容
-    message = {
+    message = build_message(user, vehicle)
+
+    send_to_teams_webhook(user.webhook_url, message)
+  end
+
+  private
+
+  def build_message(user, vehicle)
+    if vehicle.lease_expiry.present?
+      create_message(
+        title: "#{user.name}様の車両のリース満了日が近づいています",
+        text: "次回のリース満了日は#{vehicle.lease_expiry}です。お忘れなく、適切な手続きを行ってください。",
+        vehicle: vehicle
+      )
+    elsif vehicle.inspection_due.present?
+      create_message(
+        title: "#{user.name}様の車両の車検期限が近づいています",
+        text: "次回の車検期限は#{vehicle.inspection_due}です。お忘れなく、適切な手続きを行ってください。",
+        vehicle: vehicle
+      )
+    end
+  end
+
+  def create_message(title:, text:, vehicle:)
+    {
       "@type" => "MessageCard",
       "@context" => "http://schema.org/extensions",
       "summary" => "Issue 176715375",
       "themeColor" => "0078D7",
-      "title" => "#{user.name}様の車両の車検期限が近づいています",
+      "title" => title,
       "sections" => [{
         "activityTitle" => "#{vehicle.maker} #{vehicle.model} #{vehicle.license_plate}",
-        "text" => "次回の車検期限は#{vehicle.inspection_due}です。お忘れなく、適切な手続きを行ってください。",
+        "text" => text,
         "markdown" => true
       }]
     }
+  end
 
-    # HTTP クライアントを作成
+  def send_to_teams_webhook(webhook_url, message)
+    url = URI(webhook_url)
+
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
 
-    # POST リクエストを作成
     request = Net::HTTP::Post.new(url.request_uri, {'Content-Type' => 'application/json'})
     request.body = message.to_json
 
-    # POST リクエストを送信
     response = http.request(request)
-
-    # レスポンスのステータスコードを表示
-    puts response.code
   end
 end
