@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i[show edit update destroy]
 
   def home
-    logged_in? ? redirect_to(user_path(current_user)) : render('home')
+    logged_in? ? redirect_to(menu_path(current_user)) : render('home')
   end
 
   def new
