@@ -1,4 +1,4 @@
-<table>
+<table border="1" style="border-collapse: collapse">
   <tr>
     <th>メーカー</th>
     <th>モデル</th>
@@ -6,6 +6,9 @@
     <th>ナンバープレート</th>
     <th>リース満了日</th>
     <th>車検更新日</th>
+    <th>通知日</th>
+    <th>編集</th>
+    <th>削除</th>
   </tr>
   <% @vehicles.each do |vehicle| %>
     <tr>
@@ -20,9 +23,6 @@
       <td><%= link_to "削除", "/vehicles/#{vehicle.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'}, class: "btn delete" %></td>
     </tr>
   <% end %>
-  </table>
-  <div class="btn-link">
-    <th><%= link_to "追加", "/vehicles/new/#{@user_id}", class: "btn edit" %></th>
-    <th><%= link_to "csvファイルをアップロード", "/vehicles/select_csv/#{@user_id}", class: "btn edit" %></th>
-  </div>
-  <%= paginate @vehicles %>
+</table>
+
+<%= paginate @vehicles %>
