@@ -1,8 +1,22 @@
-<%= form_with(url: "/vehicles/upload/#{current_user.id}", method: :post, class: 'form-center', local: true, html: { multipart: true }) do |form| %>
-  <div class="main">
-  <div>
-    <%= form.file_field :csv, accept: '.csv,.xlsx,.xls' %>
-  </div>
-      <%= form.submit "アップロード", class: "form-btn" %>
-    </div>
+<%= form_with model:@vehicle ,local: true do |form| %>
+  <table class="edit-table">
+    <tr>
+      <th>メーカー</th>
+      <th>モデル</th>
+      <th>製造年</th>
+      <th>ナンバープレート</th>
+      <th>リース満了日</th>
+      <th>車検更新日</th>
+    </tr>
+
+    <tr class="cell">
+      <td><%= form.text_field :maker %></td>
+      <td><%= form.text_field :model %></td>
+      <td><%= form.text_field :production_year %></td>
+      <td><%= form.text_field :license_plate %></td>
+      <td><%= form.date_field :lease_expiry %></td>
+      <td><%= form.date_field :inspection_due %></td>
+      <td><%= form.submit "追加" %></td>
+    </tr>
+  </table>
 <% end %>
