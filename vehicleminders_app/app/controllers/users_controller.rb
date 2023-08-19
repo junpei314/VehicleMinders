@@ -48,9 +48,10 @@ class UsersController < ApplicationController
   end
 
   def download_csv
+    bom = "\xEF\xBB\xBF"
     respond_to do |format|
       format.html
-      format.csv { send_data generate_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data bom + generate_csv, filename: "sample.csv" }
     end
   end
 
