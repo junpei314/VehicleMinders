@@ -1,20 +1,20 @@
 <%= form_with(model: @user, class: 'form-center') do |f| %>
   <%= render 'shared/error_messages', object: @user %>
 
-  <%= f.label :名前 %>
-  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.label :名前, class: 'required' %>
+  <%= f.text_field :name, class: 'form-control', required: true %>
 
-  <%= f.label :メールアドレス %>
-  <%= f.email_field :email, class: 'form-control' %>
+  <%= f.label :メールアドレス, class: 'required' %>
+  <%= f.email_field :email, class: 'form-control', required: true %>
 
-  <%= f.label :Webhook_URL %>
+  <%= f.label :webhook_url, 'Microsoft TeamsのWebhook URL' %>
   <%= f.text_field :webhook_url, class: 'form-control' %>
 
-  <%= f.label :パスワード %>
-  <%= f.password_field :password, class: 'form-control' %>
+  <%= f.label :パスワード, class: 'required' %>
+  <%= f.password_field :password, class: 'form-control', placeholder: '6文字以上のパスワードを設定してください', required: true %>
 
-  <%= f.label :パスワード確認用 %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  <%= f.label :パスワード確認用, class: 'required' %>
+  <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'パスワードを再入力してください', required: true %>
 
   <%= f.label :メールで通知する %>
   <%= f.check_box :email_notification, class: 'form-checkbox' %>

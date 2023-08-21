@@ -27,9 +27,9 @@ class UsersController < ApplicationController
       reset_session
       log_in @user
       flash[:success] = 'ユーザー登録が完了しました。'
-      redirect_to @user
+      redirect_to menu_path(@user)
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       flash[:success] = 'プロフィールを更新しました。'
       redirect_to menu_path(@user)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 

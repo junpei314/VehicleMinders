@@ -452,3 +452,8 @@ table {
   display: inline-block;
   margin: 13px 0;
 }
+
+.required::after {
+  content: "*";
+  color: red;
+}

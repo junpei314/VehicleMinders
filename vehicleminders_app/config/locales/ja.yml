@@ -1,13 +1,14 @@
 ja:
-  helpers:
-    page_entries_info:
-      more_pages:
-        display_entries: "<b>%{total}</b>中の%{entry_name}を表示しています <b>%{first} - %{last}</b>"
-      one_page:
-        display_entries:
-          one: "<b>%{count}</b>レコード表示中です %{entry_name}"
-          other: "<b>%{count}</b>レコード表示中です %{entry_name}"
-          zero: "レコードが見つかりませんでした %{entry_name}"
+  activerecord:
+    attributes:
+      user:
+        password: "パスワード"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "は6文字以上にしてください"
   views:
     pagination:
       first: "&laquo; 最初"
