@@ -5,7 +5,6 @@
   <% @notifications.each do |notification| %>
     <tr>
       <td><%= notification.datetime %></td>
-      <td><%= link_to "編集", "/notifications/#{notification.id}/edit", class: "btn edit" %></td>
       <td><%= link_to "削除", "/notifications/#{notification.id}", data: {turbo_method: :delete, turbo_confirm: '本当に削除しますか?'}, class: "btn delete" %></td>
     </tr>
   <% end %>

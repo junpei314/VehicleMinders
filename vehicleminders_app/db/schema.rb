@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_04_024429) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_125257) do
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "vehicle_id"
     t.datetime "datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "jid_email"
+    t.string "jid_teams"
     t.index ["user_id"], name: "index_notifications_on_user_id"
     t.index ["vehicle_id"], name: "index_notifications_on_vehicle_id"
   end

@@ -5,9 +5,9 @@
 # このコントローラは、notificationsテーブルへのCRUDを管理します。
 #
 class NotificationsController < ApplicationController
-  before_action :logged_in_user, only: %i[index new create edit update destroy]
+  before_action :logged_in_user, only: %i[index new create destroy]
   before_action :correct_vehicle, only: %i[index]
-  before_action :correct_notification, only: %i[edit update destroy]
+  before_action :correct_notification, only: %i[destroy]
 
   def index
     @notifications = Notification.where(vehicle_id: params[:vehicle_id])
@@ -26,15 +26,11 @@ class NotificationsController < ApplicationController
     save_and_redirect(notification)
   end
 
-  def edit
-    @notification = Notification.find(params[:notification_id])
-  end
-
-  def update
-    notification = Notification.find(params[:notification_id])
-    notification.datetime = combined_datetime
-    save_and_redirect(notification)
-  end
+  # def update
+  #   notification = Notification.find(params[:notification_id])
+  #   notification.datetime = combined_datetime
+  #   save_and_redirect(notification)
+  # end
 
   def destroy
     notification = Notification.find(params[:notification_id])
